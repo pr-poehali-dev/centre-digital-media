@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
-  const [activeSection, setActiveSection] = useState('home');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -76,89 +74,92 @@ const Index = () => {
   ];
 
   const scrollToSection = (sectionId: string) => {
-    setActiveSection(sectionId);
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-blue-50">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-lg z-50 border-b border-purple-100">
-        <div className="container mx-auto px-6 py-4">
+      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div className="container mx-auto px-6 py-5">
           <div className="flex items-center justify-between">
             <div className="text-2xl font-bold">
               <span className="text-gradient">Centre digital & media</span>
             </div>
-            <div className="hidden md:flex gap-8">
+            <div className="hidden md:flex gap-8 items-center">
               {['Главная', 'Услуги', 'Решения', 'КПИ', 'Контакты'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
-                  className="text-sm font-medium hover:text-purple-600 transition-colors"
+                  className="text-sm font-medium text-gray-700 hover:text-purple-600 transition-colors"
                 >
                   {item}
                 </button>
               ))}
+              <Button className="gradient-primary text-white shadow-lg shadow-purple-500/30">
+                Связаться
+              </Button>
             </div>
-            <Button className="gradient-primary text-white">
-              Связаться
-            </Button>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="главная" className="pt-32 pb-20 px-6">
-        <div className="container mx-auto">
-          <div className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="inline-block mb-6">
+      <section id="главная" className="pt-40 pb-32 px-6 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 opacity-60"></div>
+        <div className="absolute top-20 right-0 w-96 h-96 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+        
+        <div className="container mx-auto relative z-10">
+          <div className={`max-w-5xl mx-auto text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="inline-block mb-8">
               <span className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 text-sm font-semibold">
                 🚀 19 лет экспертизы на российском рынке
               </span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
               Ваш мост на
-              <span className="text-gradient block">российский рынок</span>
+              <span className="text-gradient block mt-2">российский рынок</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
               Комплексные услуги продвижения иностранных брендов в России. 
-              146 миллионов цифровых потребителей ждут ваши продукты.
+              <strong className="text-gray-900">146 миллионов</strong> цифровых потребителей ждут ваши продукты
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="gradient-primary text-white text-lg px-8 py-6">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Button size="lg" className="gradient-primary text-white text-lg px-10 py-7 shadow-2xl shadow-purple-500/40 hover:scale-105 transition-transform">
                 Получить консультацию
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-2 border-purple-300">
+              <Button size="lg" variant="outline" className="text-lg px-10 py-7 border-2 border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all">
                 Скачать презентацию
               </Button>
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 max-w-5xl mx-auto">
+          {/* Stats - без карточек */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mt-32 max-w-5xl mx-auto">
             {kpis.map((kpi, index) => (
-              <Card 
+              <div 
                 key={index} 
-                className="p-6 text-center card-hover bg-white/80 backdrop-blur border-purple-100"
+                className="text-center group hover:scale-110 transition-transform duration-300"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full gradient-primary mb-4">
-                  <Icon name={kpi.icon} className="text-white" size={24} />
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full gradient-primary mb-6 group-hover:shadow-2xl group-hover:shadow-purple-500/50 transition-all">
+                  <Icon name={kpi.icon} className="text-white" size={28} />
                 </div>
-                <div className="text-3xl font-bold text-gradient mb-2">{kpi.value}</div>
-                <div className="text-sm text-gray-600">{kpi.label}</div>
-              </Card>
+                <div className="text-5xl font-bold text-gradient mb-3">{kpi.value}</div>
+                <div className="text-sm text-gray-600 font-medium">{kpi.label}</div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Solutions Section */}
-      <section id="решения" className="py-20 px-6 bg-white/50">
+      <section id="решения" className="py-32 px-6">
         <div className="container mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <div className="text-center mb-20 animate-fade-in">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">
               Ваши задачи — <span className="text-gradient">наши решения</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -166,28 +167,28 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-16 max-w-6xl mx-auto">
             {solutions.map((solution, index) => (
-              <Card 
+              <div 
                 key={index}
-                className="p-8 card-hover bg-gradient-to-br from-white to-purple-50/50 border-purple-100"
+                className="text-center group"
               >
-                <div className="w-16 h-16 rounded-2xl gradient-primary flex items-center justify-center mb-6 animate-float">
-                  <Icon name={solution.icon} className="text-white" size={32} />
+                <div className="inline-flex w-20 h-20 rounded-3xl gradient-primary items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl shadow-purple-500/30">
+                  <Icon name={solution.icon} className="text-white" size={36} />
                 </div>
-                <h3 className="text-2xl font-bold mb-4">{solution.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{solution.description}</p>
-              </Card>
+                <h3 className="text-3xl font-bold mb-4 group-hover:text-gradient transition-all">{solution.title}</h3>
+                <p className="text-gray-600 text-lg leading-relaxed">{solution.description}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="услуги" className="py-20 px-6">
+      <section id="услуги" className="py-32 px-6 bg-gradient-to-b from-white to-purple-50/30">
         <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">
               Услуги: <span className="text-gradient">единое окно</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -195,33 +196,33 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
             {services.map((service, index) => (
-              <Card 
+              <div 
                 key={index}
-                className="group p-8 card-hover bg-white/80 backdrop-blur border-purple-100 overflow-hidden relative"
+                className="group text-center hover:-translate-y-2 transition-all duration-300"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                <div className="relative z-10">
-                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon name={service.icon} className="text-white" size={28} />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                  <p className="text-gray-600">{service.description}</p>
+                <div className={`inline-flex w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg`}>
+                  <Icon name={service.icon} className="text-white" size={30} />
                 </div>
-              </Card>
+                <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{service.description}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Process Section */}
-      <section className="py-20 px-6 bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjA1IiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+')] opacity-20"></div>
+      <section className="py-32 px-6 bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        </div>
         
         <div className="container mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">
               Как мы работаем
             </h2>
             <p className="text-xl text-purple-100 max-w-2xl mx-auto">
@@ -229,20 +230,18 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-16 max-w-6xl mx-auto">
             {[
               { step: '01', title: 'Анализ', desc: 'Изучаем рынок, города, аудиторию и конкурентов', time: 'до 15 дней' },
               { step: '02', title: 'Запуск', desc: 'Адаптация коммуникаций, производство контента, старт кампаний', time: 'до 15 дней' },
               { step: '03', title: 'Рост', desc: 'Масштабирование охвата, наращивание лидов и продаж', time: 'постоянно' }
             ].map((phase, index) => (
-              <div key={index} className="relative">
-                <div className="bg-white/10 backdrop-blur rounded-2xl p-8 hover:bg-white/20 transition-all duration-300">
-                  <div className="text-6xl font-bold text-white/20 mb-4">{phase.step}</div>
-                  <h3 className="text-2xl font-bold mb-3">{phase.title}</h3>
-                  <p className="text-purple-100 mb-4">{phase.desc}</p>
-                  <div className="inline-block px-4 py-2 rounded-full bg-white/20 text-sm font-semibold">
-                    {phase.time}
-                  </div>
+              <div key={index} className="text-center group">
+                <div className="text-8xl font-bold text-white/10 mb-6 group-hover:text-white/20 transition-all">{phase.step}</div>
+                <h3 className="text-3xl font-bold mb-4">{phase.title}</h3>
+                <p className="text-purple-100 text-lg mb-6 leading-relaxed">{phase.desc}</p>
+                <div className="inline-block px-6 py-3 rounded-full bg-white/20 text-sm font-semibold backdrop-blur">
+                  {phase.time}
                 </div>
               </div>
             ))}
@@ -251,10 +250,10 @@ const Index = () => {
       </section>
 
       {/* KPI Section */}
-      <section id="кпи" className="py-20 px-6 bg-white/50">
+      <section id="кпи" className="py-32 px-6">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">
               Измеримые <span className="text-gradient">KPI</span>
             </h2>
             <p className="text-xl text-gray-600">
@@ -262,86 +261,81 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
             {[
-              { metric: 'Охват', range: '100K - 5M+', description: 'уникальных контактов' },
-              { metric: 'Лиды', range: '50 - 1000+', description: 'заявок в месяц' },
-              { metric: 'СМИ', range: '10 - 50+', description: 'публикаций (федеральные + локальные)' },
-              { metric: 'Видео', range: '450K+', description: 'просмотров, включая вирусные кейсы' }
+              { metric: 'Охват', range: '100K - 5M+', description: 'уникальных контактов', icon: 'Users' },
+              { metric: 'Лиды', range: '50 - 1000+', description: 'заявок в месяц', icon: 'Target' },
+              { metric: 'СМИ', range: '10 - 50+', description: 'публикаций', icon: 'Newspaper' },
+              { metric: 'Видео', range: '450K+', description: 'просмотров', icon: 'Video' }
             ].map((kpi, index) => (
-              <Card key={index} className="p-8 card-hover bg-white border-purple-100">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <div className="text-sm font-semibold text-purple-600 mb-2">{kpi.metric}</div>
-                    <div className="text-4xl font-bold text-gradient mb-2">{kpi.range}</div>
-                    <div className="text-gray-600">{kpi.description}</div>
-                  </div>
-                  <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center">
-                    <Icon name="TrendingUp" className="text-white" size={24} />
-                  </div>
+              <div key={index} className="text-center group hover:-translate-y-2 transition-all duration-300">
+                <div className="inline-flex w-14 h-14 rounded-2xl gradient-primary items-center justify-center mb-6 group-hover:scale-110 transition-all shadow-lg shadow-purple-500/30">
+                  <Icon name={kpi.icon} className="text-white" size={26} />
                 </div>
-              </Card>
+                <div className="text-sm font-semibold text-purple-600 mb-2">{kpi.metric}</div>
+                <div className="text-4xl font-bold text-gradient mb-2">{kpi.range}</div>
+                <div className="text-gray-600">{kpi.description}</div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section id="контакты" className="py-20 px-6">
-        <div className="container mx-auto max-w-4xl">
-          <Card className="p-12 bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 text-white border-0 relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjA1IiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+')] opacity-20"></div>
-            
-            <div className="relative z-10 text-center">
-              <h2 className="text-4xl font-bold mb-4">Готовы начать?</h2>
-              <p className="text-xl text-purple-100 mb-8">
-                Три простых шага до запуска вашего бренда в России
-              </p>
-              
-              <div className="grid md:grid-cols-3 gap-6 mb-10">
-                {[
-                  { num: '1', text: 'Заполните бриф — получите консультацию' },
-                  { num: '2', text: '30-минутный Zoom с экспертом' },
-                  { num: '3', text: 'Получите медиаплан и стартуйте за 5 дней' }
-                ].map((step, i) => (
-                  <div key={i} className="bg-white/10 backdrop-blur rounded-xl p-6">
-                    <div className="text-3xl font-bold mb-3">{step.num}</div>
-                    <div className="text-sm">{step.text}</div>
-                  </div>
-                ))}
-              </div>
-
-              <Button size="lg" className="bg-white text-purple-600 hover:bg-purple-50 text-lg px-10 py-6 font-semibold">
-                Начать сейчас
-              </Button>
-
-              <div className="mt-12 pt-8 border-t border-white/20">
-                <div className="text-sm text-purple-100 mb-4">Софья Самойлова — Директор по экспорту</div>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <a href="mailto:export@centredigital.ru" className="flex items-center gap-2 hover:text-purple-200 transition-colors">
-                    <Icon name="Mail" size={18} />
-                    export@centredigital.ru
-                  </a>
-                  <a href="tel:+79220000000" className="flex items-center gap-2 hover:text-purple-200 transition-colors">
-                    <Icon name="Phone" size={18} />
-                    +7 922 000-0000
-                  </a>
-                  <a href="https://centredigital.ru" className="flex items-center gap-2 hover:text-purple-200 transition-colors">
-                    <Icon name="Globe" size={18} />
-                    www.centredigital.ru
-                  </a>
+      <section id="контакты" className="py-32 px-6 bg-gradient-to-b from-white to-purple-50/30">
+        <div className="container mx-auto max-w-5xl text-center">
+          <div className="mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">Готовы начать?</h2>
+            <p className="text-2xl text-gray-600 max-w-3xl mx-auto">
+              Три простых шага до запуска вашего бренда в России
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-12 mb-16">
+            {[
+              { num: '1', text: 'Заполните бриф — получите консультацию', icon: 'FileText' },
+              { num: '2', text: '30-минутный Zoom с экспертом', icon: 'Video' },
+              { num: '3', text: 'Получите медиаплан и стартуйте за 5 дней', icon: 'Rocket' }
+            ].map((step, i) => (
+              <div key={i} className="group">
+                <div className="inline-flex w-16 h-16 rounded-2xl gradient-primary items-center justify-center mb-6 group-hover:scale-110 transition-all shadow-xl shadow-purple-500/40">
+                  <Icon name={step.icon} className="text-white" size={28} />
                 </div>
+                <div className="text-5xl font-bold text-gradient mb-4">{step.num}</div>
+                <div className="text-lg text-gray-700">{step.text}</div>
               </div>
+            ))}
+          </div>
+
+          <Button size="lg" className="gradient-primary text-white text-xl px-12 py-8 font-semibold shadow-2xl shadow-purple-500/40 hover:scale-105 transition-transform mb-16">
+            Начать сейчас
+          </Button>
+
+          <div className="pt-16 border-t border-gray-200">
+            <div className="text-lg text-gray-700 mb-6 font-medium">Софья Самойлова — Директор по экспорту</div>
+            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center text-gray-600">
+              <a href="mailto:export@centredigital.ru" className="flex items-center gap-3 hover:text-purple-600 transition-colors text-lg">
+                <Icon name="Mail" size={22} />
+                export@centredigital.ru
+              </a>
+              <a href="tel:+79220000000" className="flex items-center gap-3 hover:text-purple-600 transition-colors text-lg">
+                <Icon name="Phone" size={22} />
+                +7 922 000-0000
+              </a>
+              <a href="https://centredigital.ru" className="flex items-center gap-3 hover:text-purple-600 transition-colors text-lg">
+                <Icon name="Globe" size={22} />
+                centredigital.ru
+              </a>
             </div>
-          </Card>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 bg-slate-900 text-white">
+      <footer className="py-10 px-6 bg-slate-900 text-white">
         <div className="container mx-auto text-center">
-          <div className="text-sm text-gray-400">
-            © 2026 Centre digital & media. Ижевск, Россия. Все права защищены.
+          <div className="text-gray-400">
+            © 2026 Centre digital & media. Ижевск, Россия
           </div>
         </div>
       </footer>
