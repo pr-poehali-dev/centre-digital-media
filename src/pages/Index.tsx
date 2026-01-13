@@ -9,70 +9,6 @@ const Index = () => {
     setIsVisible(true);
   }, []);
 
-  const services = [
-    {
-      icon: 'Target',
-      title: 'Go-to-Market',
-      description: 'Стратегия, анализ рынка, медиапланирование по регионам',
-      color: 'from-purple-500 to-pink-500'
-    },
-    {
-      icon: 'Radio',
-      title: 'Медиазакупки',
-      description: 'ТВ, радио, digital и наружная реклама',
-      color: 'from-blue-500 to-purple-500'
-    },
-    {
-      icon: 'MessageSquare',
-      title: 'Контент / SMM',
-      description: 'Локализация, видео, фото, ведение соцсетей',
-      color: 'from-orange-500 to-pink-500'
-    },
-    {
-      icon: 'Newspaper',
-      title: 'PR и GR',
-      description: 'Публикации в СМИ, работа с органами власти',
-      color: 'from-cyan-500 to-blue-500'
-    },
-    {
-      icon: 'Video',
-      title: 'Видеопродакшн',
-      description: 'Собственная команда, все форматы контента',
-      color: 'from-pink-500 to-purple-500'
-    },
-    {
-      icon: 'BarChart3',
-      title: 'Аналитика',
-      description: 'Отчётность по ключевым KPI в реальном времени',
-      color: 'from-indigo-500 to-purple-500'
-    }
-  ];
-
-  const kpis = [
-    { value: '5M+', label: 'Уникальных контактов', icon: 'Users' },
-    { value: '1000+', label: 'Заявок в месяц', icon: 'TrendingUp' },
-    { value: '50+', label: 'Публикаций в СМИ', icon: 'Newspaper' },
-    { value: '19', label: 'Лет экспертизы', icon: 'Award' }
-  ];
-
-  const solutions = [
-    {
-      title: 'Выход на рынок',
-      description: 'Без открытия офиса — мы ваша российская команда',
-      icon: 'Rocket'
-    },
-    {
-      title: 'Узнаваемость бренда',
-      description: 'От первых продаж до прочной деловой репутации',
-      icon: 'Sparkles'
-    },
-    {
-      title: 'Региональный рост',
-      description: '85% покупателей — вне Москвы и Петербурга',
-      icon: 'MapPin'
-    }
-  ];
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -88,7 +24,7 @@ const Index = () => {
               <span className="text-gradient">Centre digital & media</span>
             </div>
             <div className="hidden md:flex gap-8 items-center">
-              {['Главная', 'Услуги', 'Решения', 'КПИ', 'Контакты'].map((item) => (
+              {['Возможности', 'Услуги', 'Процесс', 'Результаты', 'Контакты'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -106,7 +42,7 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="главная" className="pt-40 pb-32 px-6 relative overflow-hidden">
+      <section className="pt-40 pb-32 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 opacity-60"></div>
         <div className="absolute top-20 right-0 w-96 h-96 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full blur-3xl opacity-20 animate-pulse"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full blur-3xl opacity-20 animate-pulse"></div>
@@ -119,12 +55,14 @@ const Index = () => {
               </span>
             </div>
             <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
-              Ваш мост на
-              <span className="text-gradient block mt-2">российский рынок</span>
+              Ваш надёжный партнёр
+              <span className="text-gradient block mt-2">для выхода в Россию</span>
             </h1>
-            <p className="text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Комплексные услуги продвижения иностранных брендов в России. 
-              <strong className="text-gray-900">146 миллионов</strong> цифровых потребителей ждут ваши продукты
+            <p className="text-2xl text-gray-600 mb-4 max-w-3xl mx-auto leading-relaxed">
+              Полнофункциональное медиа-агентство с собственными медиаактивами
+            </p>
+            <p className="text-xl text-gray-500 mb-12 max-w-2xl mx-auto">
+              Превратим рыночный потенциал в ваш рост — от стратегии до продаж
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button size="lg" className="gradient-primary text-white text-lg px-10 py-7 shadow-2xl shadow-purple-500/40 hover:scale-105 transition-transform">
@@ -135,69 +73,136 @@ const Index = () => {
               </Button>
             </div>
           </div>
-
-          {/* Stats - без карточек */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mt-32 max-w-5xl mx-auto">
-            {kpis.map((kpi, index) => (
-              <div 
-                key={index} 
-                className="text-center group hover:scale-110 transition-transform duration-300"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full gradient-primary mb-6 group-hover:shadow-2xl group-hover:shadow-purple-500/50 transition-all">
-                  <Icon name={kpi.icon} className="text-white" size={28} />
-                </div>
-                <div className="text-5xl font-bold text-gradient mb-3">{kpi.value}</div>
-                <div className="text-sm text-gray-600 font-medium">{kpi.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Solutions Section */}
-      <section id="решения" className="py-32 px-6">
-        <div className="container mx-auto">
-          <div className="text-center mb-20 animate-fade-in">
+      {/* Market Opportunity Section */}
+      <section id="возможности" className="py-32 px-6 bg-gradient-to-b from-white to-purple-50/30">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold mb-6">
-              Ваши задачи — <span className="text-gradient">наши решения</span>
+              Россия ждёт <span className="text-gradient">новые бренды</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Фокус на результате: от запуска первых продаж до долгосрочного роста
+            <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Российский рынок сегодня — это <strong className="text-gray-900">146 миллионов</strong> активных потребителей
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-16 max-w-6xl mx-auto">
-            {solutions.map((solution, index) => (
-              <div 
-                key={index}
-                className="text-center group"
-              >
-                <div className="inline-flex w-20 h-20 rounded-3xl gradient-primary items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl shadow-purple-500/30">
-                  <Icon name={solution.icon} className="text-white" size={36} />
+          <div className="grid md:grid-cols-3 gap-12 mb-20">
+            {[
+              {
+                icon: 'UserCheck',
+                title: 'Открыты к новому',
+                description: 'Готовы пробовать товары и услуги из дружественных стран — если оно понятно и актуально'
+              },
+              {
+                icon: 'Heart',
+                title: 'Доверяют соседям',
+                description: 'Продукция из СНГ, Азии и Ближнего Востока воспринимается с особым доверием'
+              },
+              {
+                icon: 'TrendingUp',
+                title: 'Окно возможностей',
+                description: 'После 2022 года освободились ниши — реальные возможности для новых игроков'
+              }
+            ].map((item, index) => (
+              <div key={index} className="text-center group">
+                <div className="inline-flex w-20 h-20 rounded-3xl gradient-primary items-center justify-center mb-8 group-hover:scale-110 transition-all duration-300 shadow-xl shadow-purple-500/30">
+                  <Icon name={item.icon} className="text-white" size={36} />
                 </div>
-                <h3 className="text-3xl font-bold mb-4 group-hover:text-gradient transition-all">{solution.title}</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">{solution.description}</p>
+                <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
+                <p className="text-gray-600 text-lg leading-relaxed">{item.description}</p>
               </div>
             ))}
+          </div>
+
+          <div className="bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 rounded-3xl p-12 text-white relative overflow-hidden">
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+            </div>
+            <div className="relative z-10">
+              <h3 className="text-3xl font-bold mb-6">Почему регионы — ваш главный актив</h3>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <div className="text-5xl font-bold mb-4">85%</div>
+                  <p className="text-xl text-purple-100">населения живёт вне Москвы и Петербурга — именно там формируется устойчивый спрос</p>
+                </div>
+                <div>
+                  <div className="space-y-3">
+                    <p className="text-lg flex items-start gap-3">
+                      <Icon name="MapPin" size={20} className="flex-shrink-0 mt-1" />
+                      Поведение в Екатеринбурге ≠ поведению в Краснодаре
+                    </p>
+                    <p className="text-lg flex items-start gap-3">
+                      <Icon name="Target" size={20} className="flex-shrink-0 mt-1" />
+                      Ценности в Новосибирске ≠ ценностям в Казани
+                    </p>
+                    <p className="text-lg flex items-start gap-3">
+                      <Icon name="Tv" size={20} className="flex-shrink-0 mt-1" />
+                      Медиапотребление в Ижевске ≠ потреблению во Владивостоке
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-8 pt-8 border-t border-white/20">
+                <p className="text-lg font-semibold">Без учёта региональной специфики даже сильный бренд теряет до 70% эффективности</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="услуги" className="py-32 px-6 bg-gradient-to-b from-white to-purple-50/30">
-        <div className="container mx-auto">
+      <section id="услуги" className="py-32 px-6">
+        <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold mb-6">
-              Услуги: <span className="text-gradient">единое окно</span>
+              Полный спектр услуг <span className="text-gradient">под ключ</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Глубокая локализация и экспертиза российского рынка
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Вы фокусируетесь на продукте — мы на том, чтобы его услышали и захотели
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
-            {services.map((service, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {[
+              {
+                icon: 'Target',
+                title: 'Стратегический вход',
+                description: 'Анализ рынка, позиционирование, медиаплан с распределением по регионам',
+                color: 'from-purple-500 to-pink-500'
+              },
+              {
+                icon: 'MessageSquare',
+                title: 'Контент и коммуникации',
+                description: 'Локализация, SMM, видео, фото — под российские платформы',
+                color: 'from-blue-500 to-purple-500'
+              },
+              {
+                icon: 'Newspaper',
+                title: 'PR и СМИ',
+                description: 'Публикации в федеральных и региональных СМИ, работа с экспертами',
+                color: 'from-orange-500 to-pink-500'
+              },
+              {
+                icon: 'Video',
+                title: 'Видеопродакшн',
+                description: 'От коротких Reels до имиджевых фильмов — собственная команда',
+                color: 'from-cyan-500 to-blue-500'
+              },
+              {
+                icon: 'Radio',
+                title: 'Медиазакупки',
+                description: 'ТВ, радио, digital и наружная реклама — прямые договоры без посредников',
+                color: 'from-pink-500 to-purple-500'
+              },
+              {
+                icon: 'BarChart3',
+                title: 'Аналитика',
+                description: 'Прозрачная отчётность по охватам, лидам, продажам в реальном времени',
+                color: 'from-indigo-500 to-purple-500'
+              }
+            ].map((service, index) => (
               <div 
                 key={index}
                 className="group text-center hover:-translate-y-2 transition-all duration-300"
@@ -210,31 +215,53 @@ const Index = () => {
               </div>
             ))}
           </div>
+
+          <div className="mt-20 text-center">
+            <div className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl">
+              <Icon name="MapPin" className="text-purple-600" size={24} />
+              <span className="text-lg font-semibold text-gray-800">Региональное покрытие: работа в 80+ городах России</span>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Process Section */}
-      <section className="py-32 px-6 bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 text-white relative overflow-hidden">
+      <section id="процесс" className="py-32 px-6 bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-white rounded-full blur-3xl"></div>
         </div>
         
-        <div className="container mx-auto relative z-10">
+        <div className="container mx-auto relative z-10 max-w-6xl">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold mb-6">
-              Как мы работаем
+              Чётко и быстро
             </h2>
             <p className="text-xl text-purple-100 max-w-2xl mx-auto">
-              Структурировано и быстро — от анализа до масштабирования
+              Структурированный процесс — от анализа до масштабирования
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-16 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-12">
             {[
-              { step: '01', title: 'Анализ', desc: 'Изучаем рынок, города, аудиторию и конкурентов', time: 'до 15 дней' },
-              { step: '02', title: 'Запуск', desc: 'Адаптация коммуникаций, производство контента, старт кампаний', time: 'до 15 дней' },
-              { step: '03', title: 'Рост', desc: 'Масштабирование охвата, наращивание лидов и продаж', time: 'постоянно' }
+              { 
+                step: '01', 
+                title: 'Анализ и стратегия', 
+                desc: 'Исследование ниши, конкурентов, ЦА по регионам. Рекомендации по адаптации бренда. Медиаплан с распределением по городам.', 
+                time: 'до 15 дней' 
+              },
+              { 
+                step: '02', 
+                title: 'Запуск и тест', 
+                desc: 'Создание контента и креативов. Настройка digital-кампаний. Первые публикации в СМИ и соцсетях.', 
+                time: 'до 15 дней' 
+              },
+              { 
+                step: '03', 
+                title: 'Масштабирование', 
+                desc: 'Расширение географии. Увеличение конверсий. Постоянная оптимизация на основе данных.', 
+                time: 'постоянно' 
+              }
             ].map((phase, index) => (
               <div key={index} className="text-center group">
                 <div className="text-8xl font-bold text-white/10 mb-6 group-hover:text-white/20 transition-all">{phase.step}</div>
@@ -249,19 +276,19 @@ const Index = () => {
         </div>
       </section>
 
-      {/* KPI Section */}
-      <section id="кпи" className="py-32 px-6">
+      {/* Results Section */}
+      <section id="результаты" className="py-32 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold mb-6">
               Измеримые <span className="text-gradient">KPI</span>
             </h2>
-            <p className="text-xl text-gray-600">
-              Прозрачное отслеживание — никаких «чёрных ящиков»
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Мы согласовываем и фиксируем цели до старта. Все данные — в регулярных отчётах. Без «чёрных ящиков»
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
             {[
               { metric: 'Охват', range: '100K - 5M+', description: 'уникальных контактов', icon: 'Users' },
               { metric: 'Лиды', range: '50 - 1000+', description: 'заявок в месяц', icon: 'Target' },
@@ -278,6 +305,27 @@ const Index = () => {
               </div>
             ))}
           </div>
+
+          <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-3xl p-12">
+            <h3 className="text-3xl font-bold mb-8 text-center">Почему именно мы</h3>
+            <div className="grid md:grid-cols-2 gap-8">
+              {[
+                { icon: 'Award', text: '19 лет на рынке — знаем, как меняется поведение аудитории' },
+                { icon: 'Radio', text: 'Собственные медиа: радиостанции, сайты, соцсети — без посредников' },
+                { icon: 'MapPin', text: 'Региональная сеть: глубокое знание местного контекста' },
+                { icon: 'Package', text: 'Комплекс «под ключ»: от анализа до видеопродакшена' },
+                { icon: 'DollarSign', text: 'Гибкие пакеты: от аудита (1500€) до full-cycle (8000€/мес)' },
+                { icon: 'Users', text: 'Директор по экспорту лично курирует каждый проект' }
+              ].map((item, index) => (
+                <div key={index} className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-xl gradient-primary flex items-center justify-center">
+                    <Icon name={item.icon} className="text-white" size={22} />
+                  </div>
+                  <p className="text-gray-700 text-lg leading-relaxed pt-2">{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -293,16 +341,16 @@ const Index = () => {
           
           <div className="grid md:grid-cols-3 gap-12 mb-16">
             {[
-              { num: '1', text: 'Заполните бриф — получите консультацию', icon: 'FileText' },
-              { num: '2', text: '30-минутный Zoom с экспертом', icon: 'Video' },
-              { num: '3', text: 'Получите медиаплан и стартуйте за 5 дней', icon: 'Rocket' }
+              { num: '1', text: 'Заполните короткий бриф (5 минут) — получите бесплатную консультацию', icon: 'FileText' },
+              { num: '2', text: '30-минутный Zoom с директором по экспорту — обсудим вашу нишу', icon: 'Video' },
+              { num: '3', text: 'Индивидуальное КП с медиапланом, KPI и бюджетом — старт за 5 дней', icon: 'Rocket' }
             ].map((step, i) => (
               <div key={i} className="group">
                 <div className="inline-flex w-16 h-16 rounded-2xl gradient-primary items-center justify-center mb-6 group-hover:scale-110 transition-all shadow-xl shadow-purple-500/40">
                   <Icon name={step.icon} className="text-white" size={28} />
                 </div>
                 <div className="text-5xl font-bold text-gradient mb-4">{step.num}</div>
-                <div className="text-lg text-gray-700">{step.text}</div>
+                <div className="text-lg text-gray-700 leading-relaxed">{step.text}</div>
               </div>
             ))}
           </div>
